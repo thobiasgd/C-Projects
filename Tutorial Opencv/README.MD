@@ -42,3 +42,17 @@ Mat kernal = getStructuringElement(MORPH_RECT, Size(5,5)); // Matriz do kernel
 dilate(imgCanny, imgDil, kernal); // Função de dilatação de linhas
 erode(imgDil, imgErode, kernal); // Realiza a erosão em uma imagem
 ```
+## Tamnho e ROI
+### Reescalonar Imagens
+Para reescalonar imagens, usam-se duas técnicas. Ou o programador define um x e y específicos para largura e altura, ou escolher um valor k para a escala que é multiplicado pelo valor atual de largura e altura.
+```c++
+resize(img, imgResized, Size(640, 480)); // Converte a imagem para um número específico de largura e altura
+resize(img, imgScaled, Size(), k, k); // Converte o tamanho da largura e altura da imagem, em proporcional a um número
+```
+### ROI (Region of Interest)
+A função de ROI, nada mais é que um recorte da imagem. Defina-se um objeto do tipo retângulo (Rect) que é aplicado na nova matriz;
+```c++
+Mat imgResized, imgScaled, imgCroped;
+Rect roi(100, 100, 300, 250); // #1 x da imagem - 2# y da imagem - 3# tamanho x da ROI - 4# tamnho y da ROI
+imgCroped = img(roi);
+```
