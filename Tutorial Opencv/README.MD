@@ -67,5 +67,17 @@ line(img, Point(130, 296), Point(386, 296), Scalar(255, 255, 255), 2); // #1 ima
 ### Textos
 A diferênça da função de texto para das formas, é basicamente o tipo de fonte, que por sua vez pode ser encontrado na documentação.
 ```c++
-putText(img, "Murtaza's Workshop", Point(137, 262), FONT_HERSHEY_DUPLEX, 0.75, Scalar(0, 69, 255), 2); // #1 imagem input - #2 Texto - #3 Ponto Inicial - #4 Fonte - #5 Cor - #6 Grossura
+putText(img, "Texto teste", Point(137, 262), FONT_HERSHEY_DUPLEX, 0.75, Scalar(0, 69, 255), 2); // #1 imagem input - #2 Texto - #3 Ponto Inicial - #4 Fonte - #5 Cor - #6 Grossura
+```
+## Warping 
+Uma função interessante do mundo da visão computacional, é o warping. Uma técnica que permite trazer um objeto que está na perspectiva "diagonal", para uma perspectiva de "top view".
+```c++
+float w = 250, h = 350; // largura e altura da "nova" imagem
+Mat matrix, imgWarp;
+
+Point2f src[4] = {{529,142},{771, 190}, {405, 395}, {674, 457}}; // Pontos float da imagem fonte
+Point2f dst[4] = {{0.0f,0.0f},{w, 0.0f}, {0.0f, h}, {w, h}}; // Pontos finais da imagem final 
+
+matrix = getPerspectiveTransform(src, dst);
+warpPerspective(img, imgWarp, matrix, Point(w, h));
 ```
