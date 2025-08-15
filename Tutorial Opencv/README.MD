@@ -35,3 +35,10 @@ Deve-se ressaltar que a seguinte função requere uma imagem na escala cor de ci
 ```c++
 Canny(imgBlur, imgCanny, 25, 75); // Função de detecção de bordas
 ```
+### Dilatação e Erosão
+Para ambas as função, deve-se declarar um kernel, que é uma matriz que "roda" a imagem e vai aplicando o efeito. Também deve-se ressaltar que este kernel deve possuir seus dois valores ímpares. As duas imagens recebem um imput de imagem binária.
+```c++
+Mat kernal = getStructuringElement(MORPH_RECT, Size(5,5)); // Matriz do kernel
+dilate(imgCanny, imgDil, kernal); // Função de dilatação de linhas
+erode(imgDil, imgErode, kernal); // Realiza a erosão em uma imagem
+```
