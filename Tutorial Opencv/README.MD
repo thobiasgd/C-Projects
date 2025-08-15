@@ -97,3 +97,34 @@ Scalar upper(hmax, smax, vmax);
 inRange(imgHSV, lower, upper, mask); // mask será uma matriz binária com os valores que estão de acordo com o filtro inRange()
 bitwise_and(img, img, result, mask); // Faz a intersecção entre a imagem original e a máscara
 ```
+### Trackbars
+As trackbars são úteis para realizar a análise das cores desejadas, quando não se sabe qua valores deve-se usar no HSV. Para criar esta ferramenta, deve-se instanciar uma janela, e aribuir tracksbars para cada um dos valores desejados.
+```c++
+int hmin = 0, smin = 110, vmin = 153;
+int hmax = 19, smax = 240, vmax = 255;
+
+namedWindow("Trackbars", WINDOW_NORMAL); // Cria a janela
+resizeWindow("Trackbars", 640, 200); // Redimensiona a janela
+
+// Criando as trackbars em si
+createTrackbar("Hue Min", "Trackbars", &hmin, 179); // Valores de Hue tem o máximo de 180
+createTrackbar("Sat Min", "Trackbars", &smin, 255);
+createTrackbar("Val Min", "Trackbars", &vmin, 255);
+
+createTrackbar("Hue Max", "Trackbars", &hmax, 179);
+createTrackbar("Sat Max", "Trackbars", &smax, 255);
+createTrackbar("Val Max", "Trackbars", &vmax, 255);
+
+while(true){
+
+    Scalar lower(hmin, smin, vmin);
+    Scalar upper(hmax, smax, vmax);
+    inRange(imgHSV, lower, upper, mask);
+
+    imshow("Imagem", img);
+    imshow("Imagem HSC", imgHSV);
+    imshow("Imagem Máscara", mask);
+    waitKey(1);
+
+}
+```
