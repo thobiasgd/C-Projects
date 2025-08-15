@@ -56,3 +56,16 @@ Mat imgResized, imgScaled, imgCroped;
 Rect roi(100, 100, 300, 250); // #1 x da imagem - 2# y da imagem - 3# tamanho x da ROI - 4# tamnho y da ROI
 imgCroped = img(roi);
 ```
+## Formas e Textos
+### Inserindo Formas Geométricas
+As função de cada uma das formas geométricas são relativamente similares, apenas deve-se prestar atenção nos tipos de inputs de cada um dos parâmetros
+```c++
+circle(img, Point(256, 256), 155, Scalar(0, 69, 255), FILLED); // #1 imagem input - #2 Centro do circulo - #3 raio - #4 Cor - #5 Grossura [FILLED para preencher]
+rectangle(img, Point(130, 226), Point(382, 286), Scalar(255, 255,255), FILLED); // #1 imagem input - #2 Ponto Incial - #3 Ponto Final - #4 Cor - #5 Grossura [FILLED para preencher]
+line(img, Point(130, 296), Point(386, 296), Scalar(255, 255, 255), 2); // #1 imagem input - #2 Ponto Incial - #3 Ponto Final - #4 Cor - #5 Grossura
+```
+### Textos
+A diferênça da função de texto para das formas, é basicamente o tipo de fonte, que por sua vez pode ser encontrado na documentação.
+```c++
+putText(img, "Murtaza's Workshop", Point(137, 262), FONT_HERSHEY_DUPLEX, 0.75, Scalar(0, 69, 255), 2); // #1 imagem input - #2 Texto - #3 Ponto Inicial - #4 Fonte - #5 Cor - #6 Grossura
+```
