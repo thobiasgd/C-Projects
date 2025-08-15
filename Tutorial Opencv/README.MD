@@ -74,10 +74,26 @@ Uma função interessante do mundo da visão computacional, é o warping. Uma t�
 ```c++
 float w = 250, h = 350; // largura e altura da "nova" imagem
 Mat matrix, imgWarp;
+string path = "Resources/cards.jpg";
+Mat img = imread(path);
 
 Point2f src[4] = {{529,142},{771, 190}, {405, 395}, {674, 457}}; // Pontos float da imagem fonte
 Point2f dst[4] = {{0.0f,0.0f},{w, 0.0f}, {0.0f, h}, {w, h}}; // Pontos finais da imagem final 
 
 matrix = getPerspectiveTransform(src, dst);
 warpPerspective(img, imgWarp, matrix, Point(w, h));
+```
+## Filtro de Cores
+Para filtrar cores numa imagem, primeiramente instancia-se os valores minimos e máximos desejados da escala de cores HSV. Em seguida se converte a imagem em HSV e por fim usa-se a função inRange().
+```c++
+Mat matrix, imgHSV, mask, result; 
+int hmin = 0, smin = 110, vmin = 153;
+int hmax = 19, smax = 240, vmax = 255;
+
+cvtColor(img, imgHSV, COLOR_BGR2HSV);
+
+Scalar lower(hmin, smin, vmin);
+Scalar upper(hmax, smax, vmax);
+inRange(imgHSV, lower, upper, mask); // mask será uma matriz binária com os valores que estão de acordo com o filtro inRange()
+bitwise_and(img, img, result, mask); // Faz a intersecção entre a imagem original e a máscara
 ```
