@@ -9,7 +9,7 @@ Na maioria dos projetos que usam opencv, irá se usar os seguintes módulos da o
 #include <opencv2/highgui.hpp>
 ```
 
-## Abir e Exibir
+## Abrir e Exibir
 Para abrir um imagem e exibila em uma janela usa-se a seguinte estrutura na função main():
 ```c++
 string path = "Resources/test.png";
@@ -24,4 +24,14 @@ Em muitos projetos de processamento de imagens, usam-se em diversos momentos a c
 A seguinte função converte a imagem em outras escalas, deve-se olhar a documentação para o terceiro parâmetro que se refere a cada uma das escalas
 ```c++
 cvtColor(img, imgGray, COLOR_BGR2GRAY);// Função que transforma de RGB para cinza
+```
+### Blur
+O efeito de blur é útil para reduzir ruidos de imagens
+```c++
+GaussianBlur(img, imgBlur, Size(7,7), 5, 0); // Função que aplica Blur na imagem
+```
+### Detecção de bordas
+Deve-se ressaltar que a seguinte função requere uma imagem na escala cor de cinza:
+```c++
+Canny(imgBlur, imgCanny, 25, 75); // Função de detecção de bordas
 ```
