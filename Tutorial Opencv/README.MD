@@ -128,3 +128,34 @@ while(true){
 
 }
 ```
+## Detecção de Contornos
+O processo para detecção de contornos é um pouco mais complicado, mas vamos trabalhar apenas com o básico. Primeiramente cria-se as váriaveis de contrnos e hierarquia.
+```c++
+vector<vector<Point>> contours;
+vector<Vec4i> hierarchy; // Basicamente Vec4i é um vetor padrão do opencv que possui 4 ints
+```
+Em seguida, aplica-se a função que realiza a busca dos contornos. O parâmetro 3 e 4 são referêntes ao método de procura.
+```c++
+findContours(imaDilation, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE); // Encontra os contornos
+```
+Por fim, desenha-se os contornos. Os arquivos `contourDetection.cpp` e `functions.cpp`, abordam algumas outras tecnicas interessantes envolvendo contornos.:
+```c++
+drawContours(imgDraw, contours, i, Scalar(255, 255, 0), 2); // Desenha os contornos #1 imagem final - 2# variável dos contornos - #3 cor - 4# grossura
+```
+## Detecção de objetos
+Uma técnica de detecção de objetos que já vem padrão com a opencv, é a ténica de cascada. para isto, basta escolher um arquivo .xml do objeto desejado, e aplica-lo na função. Instancia-se um objeto da classe `CascadeClassifier`, que por sua vez recebe o local do arquivo.
+```c++
+CascadeClassifier faceCascade;
+faceCascade.load("./Resources/haarcascade_frontalface_default.xml"); // abre o arquivo .xml
+
+if (faceCascade.empty()){ cout << "XML file not loaded\n"; }  // Verifica se conseguiu abrir/encontrar o arquivo
+
+vector<Rect> faces;
+faceCascade.detectMultiScale(img, faces, 1.1, 10);
+```
+Em seguida, sugere-se desenhar um retângulo na face detectada. Nota-se que uma variável do tipo Rect, possui métodos para se obter os pontos de Top Left (tl) e Bottom Right (br).
+```c++
+for(int i = 0; i < faces.size(); i++){
+    rectangle(img, faces[i].tl(), faces[i].br(), Scalar(255, 0, 255), 2); // #1 imagem input - #2 Ponto Incial - #3 Ponto Final - #4 Cor - #5 Grossura [FILLED para preencher]
+}
+```
